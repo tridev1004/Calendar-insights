@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 248 100% 99%;
+    --foreground: 213 27% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 213 27% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 27% 14%;
+
+    --primary: 213 94% 68%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 213 27% 96%;
+    --secondary-foreground: 213 27% 14%;
+
+    --muted: 213 27% 96%;
+    --muted-foreground: 213 14% 46%;
+
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Calendar specific colors */
+    --calendar-highlight: 213 94% 68%;
+    --calendar-highlight-hover: 213 94% 63%;
+    --calendar-today: 142 76% 36%;
+    --calendar-selected: 280 100% 70%;
+    
+    /* Chart colors */
+    --chart-primary: 213 94% 68%;
+    --chart-secondary: 142 76% 36%;
+    --chart-tertiary: 280 100% 70%;
+    --chart-quaternary: 25 95% 53%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-chart: linear-gradient(180deg, hsl(var(--chart-primary) / 0.8), hsl(var(--chart-primary) / 0.4)));
+    
+    /* Shadows */
+    --shadow-calendar: 0 4px 20px hsl(var(--primary) / 0.1);
+    --shadow-modal: 0 25px 50px hsl(var(--foreground) / 0.15));
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 213 27% 8%;
+    --foreground: 213 27% 96%;
+
+    --card: 213 27% 10%;
+    --card-foreground: 213 27% 96%;
+
+    --popover: 213 27% 10%;
+    --popover-foreground: 213 27% 96%;
+
+    --primary: 213 94% 68%;
+    --primary-foreground: 213 27% 8%;
+
+    --secondary: 213 27% 16%;
+    --secondary-foreground: 213 27% 96%;
+
+    --muted: 213 27% 16%;
+    --muted-foreground: 213 14% 65%;
+
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Calendar specific colors - dark mode */
+    --calendar-highlight: 213 94% 68%;
+    --calendar-highlight-hover: 213 94% 73%;
+    --calendar-today: 142 76% 40%;
+    --calendar-selected: 280 100% 75%;
+    
+    /* Shadows - dark mode */
+    --shadow-calendar: 0 4px 20px hsl(var(--foreground) / 0.1);
+    --shadow-modal: 0 25px 50px hsl(var(--background) / 0.8));
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom Calendar Styles */
+@layer components {
+  .custom-calendar {
+    @apply text-foreground;
+  }
+  
+  .custom-calendar .rbc-calendar {
+    @apply bg-card rounded-lg overflow-hidden;
+  }
+  
+  .custom-calendar .rbc-header {
+    @apply bg-muted/50 text-foreground font-semibold py-3 border-b border-border;
+  }
+  
+  .custom-calendar .rbc-today {
+    @apply bg-calendar-today/10 border border-calendar-today/30;
+  }
+  
+  .custom-calendar .rbc-off-range-bg {
+    @apply bg-muted/30;
+  }
+  
+  .custom-calendar .rbc-date-cell {
+    @apply hover:bg-muted/50 transition-colors duration-200 cursor-pointer;
+  }
+  
+  .custom-calendar .rbc-date-cell.rbc-selected {
+    @apply bg-calendar-selected/20 border border-calendar-selected/50;
+  }
+  
+  .custom-calendar .rbc-event {
+    @apply shadow-sm border-0 text-xs font-medium;
+  }
+  
+  .custom-calendar .rbc-toolbar {
+    @apply mb-4 flex flex-wrap gap-2;
+  }
+  
+  .custom-calendar .rbc-toolbar button {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 px-3 py-2 rounded-md text-sm font-medium transition-colors;
+  }
+  
+  .custom-calendar .rbc-toolbar button.rbc-active {
+    @apply bg-primary text-primary-foreground;
+  }
+  
+  .custom-calendar .rbc-toolbar-label {
+    @apply text-lg font-semibold text-foreground;
+  }
+  
+  .custom-calendar .rbc-month-view,
+  .custom-calendar .rbc-time-view {
+    @apply border border-border rounded-md overflow-hidden;
+  }
+  
+  .custom-calendar .rbc-month-row {
+    @apply border-b border-border last:border-b-0;
+  }
+  
+  .custom-calendar .rbc-day-bg {
+    @apply border-r border-border last:border-r-0;
+  }
+  
+  .custom-calendar .rbc-time-header {
+    @apply border-b border-border;
+  }
+  
+  .custom-calendar .rbc-time-content {
+    @apply border-r border-border;
+  }
+  
+  .custom-calendar .rbc-timeslot-group {
+    @apply border-b border-border/50;
+  }
+}
